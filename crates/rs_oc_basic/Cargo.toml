@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 libc = "0.2.135"
 objc = "0.2.7"
+block = "0.1.6"

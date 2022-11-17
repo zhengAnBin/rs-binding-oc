@@ -3,7 +3,7 @@ use rs_oc_appKit::{
     NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication, NSView, NSWindow,
     NSWindowStyleMask,
 };
-use rs_oc_basic::{Object, NIL, NO};
+use rs_oc_basic::{block, msg_send, sel, sel_impl, Object, NIL, NO};
 use rs_oc_core_graphics::{CGFloat, CGPoint, CGRect, CGSize};
 use rs_oc_foundation::{NSAutoreleasePool, NSString, NSURLRequest, NSURL};
 use rs_oc_webKit::{WKUserContentController, WKWebView, WKWebViewConfiguration};
@@ -110,4 +110,32 @@ impl WebView {
         let req = NSURLRequest::alloc(NIL).init_with_url(url);
         self.webview.load_request(req);
     }
+
+    pub fn evaluate_js(&self, code: &str) {
+        let script = NSString::alloc(NIL).init_with_bytes(code);
+        let b = |_: Object, error: Object| {
+            if error != NIL {
+                unsafe {
+                    let ns_str: Object = msg_send![error, localizedDescription];
+                    let str = nsstring_to_string(ns_str);
+                    println!("Error {}", str.as_ref().unwrap().as_str());
+                    return;
+                }
+            }
+        };
+        let b = block::ConcreteBlock::new(b);
+        let b = b.copy();
+        self.webview
+            .evaluate_javascript_completion_handler(script, &b);
+    }
+}
+
+pub unsafe fn nsstring_to_string(nsstring: Object) -> *mut String {
+    let len = nsstring.length();
+    let str = Box::new(String::from_utf8_unchecked(Vec::from_raw_parts(
+        nsstring.utf8_string() as *mut u8,
+        len,
+        len,
+    )));
+    Box::into_raw(str)
 }

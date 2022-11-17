@@ -8,3 +8,4 @@ pub const NIL: Object = 0 as Object;
 pub use libc;
 pub use objc::{class, msg_send, sel, sel_impl};
 pub const UTF8_ENCODING: usize = 4;
+pub use block;
