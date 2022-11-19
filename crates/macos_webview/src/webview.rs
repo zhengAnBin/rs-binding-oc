@@ -1,3 +1,4 @@
+use crate::make_handler;
 use rs_oc_appKit::{
     NSApplication, NSApplicationActivationOptions, NSApplicationActivationPolicy,
     NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication, NSView, NSWindow,
@@ -32,6 +33,7 @@ pub struct WebView {
     ns_app: Object,
     main_window: Object,
     webview: Object,
+    user_content_controller: Object,
 }
 
 impl WebView {
@@ -64,8 +66,9 @@ impl WebView {
         let webview = WKWebView::alloc(NIL);
         let frame = NSWindow::frame(main_window);
         let configuration = WKWebViewConfiguration::init(WKWebViewConfiguration::alloc(NIL));
-        let content_controller = WKUserContentController::init(WKUserContentController::alloc(NIL));
-        configuration.set_user_content_controller(content_controller);
+        let user_content_controller =
+            WKUserContentController::init(WKUserContentController::alloc(NIL));
+        configuration.set_user_content_controller(user_content_controller);
         webview.init_with_frame_configuration(frame, configuration);
 
         NSView::set_autoresizing_mask(webview, NSAutoresizingMaskOptions::NSViewWidthSizable);
@@ -74,6 +77,7 @@ impl WebView {
             ns_app,
             main_window,
             webview,
+            user_content_controller,
         }
     }
 
@@ -127,6 +131,16 @@ impl WebView {
         let b = b.copy();
         self.webview
             .evaluate_javascript_completion_handler(script, &b);
+    }
+
+    pub fn add_handler<Handler>(&self, name: &str, handler: *mut Handler)
+    where
+        Handler: FnMut(Object, Object),
+    {
+        let handler = unsafe { make_handler(format!("DWKHandler_{}", name).as_str(), handler) };
+        let name = NSString::alloc(NIL).init_with_bytes(name);
+        self.user_content_controller
+            .add_script_message_handler(handler, name);
     }
 }
 
