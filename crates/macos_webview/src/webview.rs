@@ -1,8 +1,8 @@
-use crate::make_handler;
+use crate::{make_handler, register_ns_app_lication_delegate, RS_TRAIT_PTR};
 use rs_oc_appKit::{
     NSApplication, NSApplicationActivationOptions, NSApplicationActivationPolicy,
-    NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication, NSView, NSWindow,
-    NSWindowStyleMask,
+    NSApplicationDelegate, NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication,
+    NSView, NSWindow, NSWindowStyleMask,
 };
 use rs_oc_basic::{block, msg_send, sel, sel_impl, Object, NIL, NO};
 use rs_oc_core_graphics::{CGFloat, CGPoint, CGRect, CGSize};
@@ -141,6 +141,20 @@ impl WebView {
         let name = NSString::alloc(NIL).init_with_bytes(name);
         self.user_content_controller
             .add_script_message_handler(handler, name);
+    }
+
+    pub fn set_app_delegate<T>(&self, delegate_trait: T)
+    where
+        T: NSApplicationDelegate + 'static,
+    {
+        unsafe {
+            let app_delegate = Box::new(delegate_trait);
+            let delegate_class = register_ns_app_lication_delegate::<T>();
+            let delegate: Object = msg_send![delegate_class, new];
+            let delegate_ptr: *const T = &*app_delegate;
+            (&mut *delegate).set_ivar(RS_TRAIT_PTR, delegate_ptr as usize);
+            self.ns_app.set_delegate(delegate);
+        }
     }
 }
 
