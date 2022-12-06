@@ -9,5 +9,6 @@ edition = "2021"
 rs_oc_basic = { path = "../rs_oc_basic", version = "0.1.0" }
 rs_oc_foundation = { path = "../rs_oc_foundation", version = "0.1.0" }
 rs_oc_core_graphics = { path = "../rs_oc_core_graphics", version = "0.1.0" }
-rs_oc_appKit = { path = "../rs_oc_appKit", version = "0.1.0" }
-rs_oc_webKit = { path = "../rs_oc_webKit", version = "0.1.0" }
+rs_oc_appkit = { path = "../rs_oc_appkit", version = "0.1.0" }
+rs_oc_webkit = { path = "../rs_oc_webkit", version = "0.1.0" }
+embed_plist = "1.2"

@@ -1,4 +1,4 @@
-use rs_oc_appKit::NSApplicationDelegate;
+use rs_oc_appkit::NSApplicationDelegate;
 use rs_oc_basic::{class, sel, sel_impl, ClassDecl, ObjcClass, ObjcObject, Object, Sel};
 
 pub(crate) static RS_TRAIT_PTR: &str = "rsTraitPtr";

@@ -1,4 +1,4 @@
-use rs_oc_appKit::{
+use rs_oc_appkit::{
     NSApplication, NSApplicationActivationOptions, NSApplicationActivationPolicy,
     NSBackingStoreType, NSRunningApplication, NSWindow, NSWindowStyleMask,
 };

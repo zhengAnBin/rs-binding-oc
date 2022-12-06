@@ -1,2 +1,2 @@
 [workspace]
-members=["crates/rs_oc_basic", "crates/rs_oc_foundation", "crates/rs_oc_core_graphics", "crates/rs_oc_appKit", "crates/rs_oc_webKit", "crates/macos_webview"]
+members=["crates/rs_oc_basic", "crates/rs_oc_foundation", "crates/rs_oc_core_graphics", "crates/rs_oc_appkit", "crates/rs_oc_webkit", "crates/macos_webview"]

@@ -1,5 +1,5 @@
 use macos_webview::{WebView, WebViewOptions};
-use rs_oc_appKit::NSApplicationDelegate;
+use rs_oc_appkit::NSApplicationDelegate;
 
 struct AppDelegate;
 

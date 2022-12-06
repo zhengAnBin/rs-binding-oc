@@ -7,8 +7,8 @@
 | crate                       | Description                  | Version  |
 | --------------------------- | ---------------------------- | -------- |
 | [**macos_webview**]()       | 对 webKit 的封装、使其更易用 | 暂未发布 |
-| [**rs_oc_appKit**]()        | 绑定 AppKit Framework        | 暂未发布 |
-| [**rs_oc_webKit**]()        | 绑定 WebKit Framework        | 暂未发布 |
+| [**rs_oc_appkit**]()        | 绑定 AppKit Framework        | 暂未发布 |
+| [**rs_oc_webkit**]()        | 绑定 WebKit Framework        | 暂未发布 |
 | [**rs_oc_core_graphics**]() | 绑定 Core Graphics Framework | 暂未发布 |
 | [**rs_oc_foundation**]()    | 绑定 Foundation Framework    | 暂未发布 |
 | [**rs_oc_basic**]()         | 绑定 OC 基础类型             | 暂未发布 |

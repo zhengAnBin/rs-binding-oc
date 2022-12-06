@@ -20,6 +20,10 @@ pub trait NSURLRequest: Sized {
     }
 
     fn init_with_url(self, url: Object) -> Object;
+
+    fn request_with_url(_: Self, url: Object) -> Object {
+        unsafe { msg_send![class!(NSURLRequest), requestWithURL: url] }
+    }
 }
 
 impl NSURLRequest for Object {

@@ -1,4 +1,3 @@
-use crate::NSApplicationDelegate;
 use rs_oc_basic::{class, msg_send, sel, sel_impl, Object, BOOL};
 
 #[repr(i64)]

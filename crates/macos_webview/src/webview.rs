@@ -1,5 +1,5 @@
 use crate::{make_handler, register_ns_app_lication_delegate, RS_TRAIT_PTR};
-use rs_oc_appKit::{
+use rs_oc_appkit::{
     NSApplication, NSApplicationActivationOptions, NSApplicationActivationPolicy,
     NSApplicationDelegate, NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication,
     NSView, NSWindow, NSWindowStyleMask,
@@ -7,7 +7,7 @@ use rs_oc_appKit::{
 use rs_oc_basic::{block, msg_send, sel, sel_impl, Object, NIL, NO};
 use rs_oc_core_graphics::{CGFloat, CGPoint, CGRect, CGSize};
 use rs_oc_foundation::{NSAutoreleasePool, NSString, NSURLRequest, NSURL};
-use rs_oc_webKit::{WKUserContentController, WKWebView, WKWebViewConfiguration};
+use rs_oc_webkit::{WKUserContentController, WKWebView, WKWebViewConfiguration};
 
 pub struct WebViewOptions {
     width: CGFloat,
@@ -111,7 +111,7 @@ impl WebView {
     pub fn load_url(&self, url: &str) {
         let url = NSString::alloc(NIL).init_with_bytes(url);
         let url = NSURL::alloc(NIL).init_with_string(url);
-        let req = NSURLRequest::alloc(NIL).init_with_url(url);
+        let req = NSURLRequest::request_with_url(NIL, url);
         self.webview.load_request(req);
     }
 
