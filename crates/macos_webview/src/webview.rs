@@ -7,14 +7,15 @@ use rs_oc_appkit::{
 use rs_oc_basic::{block, msg_send, sel, sel_impl, Object, NIL, NO};
 use rs_oc_core_graphics::{CGFloat, CGPoint, CGRect, CGSize};
 use rs_oc_foundation::{NSAutoreleasePool, NSString, NSURLRequest, NSURL};
-use rs_oc_webkit::{WKUserContentController, WKWebView, WKWebViewConfiguration};
+use rs_oc_webkit::{WKPreferences, WKUserContentController, WKWebView, WKWebViewConfiguration};
 
 pub struct WebViewOptions {
-    width: CGFloat,
-    height: CGFloat,
-    x: CGFloat,
-    y: CGFloat,
-    title: String,
+    pub width: CGFloat,
+    pub height: CGFloat,
+    pub x: CGFloat,
+    pub y: CGFloat,
+    pub title: String,
+    pub debug: bool,
 }
 
 impl Default for WebViewOptions {
@@ -25,6 +26,7 @@ impl Default for WebViewOptions {
             x: 0.,
             y: 0.,
             title: String::from("webview"),
+            debug: false,
         }
     }
 }
@@ -69,6 +71,14 @@ impl WebView {
         let user_content_controller =
             WKUserContentController::init(WKUserContentController::alloc(NIL));
         configuration.set_user_content_controller(user_content_controller);
+        if webview_options.debug {
+            let developer_extras_enabled =
+                NSString::alloc(NIL).init_with_bytes("developerExtrasEnabled");
+            let preferences = WKPreferences::init(WKPreferences::alloc(NIL));
+            let yes = NSString::alloc(NIL).init_with_bytes("YES");
+            preferences.set_value_for_key(yes, developer_extras_enabled);
+            configuration.set_preferences(preferences);
+        }
         webview.init_with_frame_configuration(frame, configuration);
 
         NSView::set_autoresizing_mask(webview, NSAutoresizingMaskOptions::NSViewWidthSizable);

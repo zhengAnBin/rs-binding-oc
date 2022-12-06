@@ -30,6 +30,8 @@ pub trait WKWebViewConfiguration: Sized {
     fn init(self) -> Object;
 
     fn set_user_content_controller(self, controller: Object);
+
+    fn set_preferences(self, wk_preferences: Object);
 }
 
 impl WKWebViewConfiguration for Object {
@@ -39,5 +41,9 @@ impl WKWebViewConfiguration for Object {
 
     fn set_user_content_controller(self, controller: Object) {
         unsafe { msg_send![self, setUserContentController: controller] }
+    }
+
+    fn set_preferences(self, wk_preferences: Object) {
+        unsafe { msg_send![self, setPreferences: wk_preferences] }
     }
 }
