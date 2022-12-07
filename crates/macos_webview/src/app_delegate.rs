@@ -13,13 +13,12 @@ fn get_trait<T>(this: &ObjcObject) -> &T {
 
 extern "C" fn application_will_finish_launching<T: NSApplicationDelegate>(
     this: &ObjcObject,
-    _: Sel,
-    _: Object,
+    _cmd: Sel,
 ) {
     get_trait::<T>(this).application_will_finish_launching();
 }
 
-pub fn register_ns_app_lication_delegate<T: NSApplicationDelegate>() -> *const ObjcClass {
+pub fn register_ns_application_delegate<T: NSApplicationDelegate>() -> *const ObjcClass {
     unsafe {
         let superclass = class!(NSObject);
         let mut decl = ClassDecl::new("RSAppDelegate", superclass).unwrap();
@@ -29,7 +28,8 @@ pub fn register_ns_app_lication_delegate<T: NSApplicationDelegate>() -> *const O
 
         decl.add_method(
             sel!(applicationWillFinishLaunching:),
-            application_will_finish_launching::<T> as extern "C" fn(&ObjcObject, _, _),
+            application_will_finish_launching::<T> as extern "C" fn(&ObjcObject, Sel),
+            // application_will_finish_launching::<T> as extern "C" fn(&ObjcObject, _, _),
         );
 
         return decl.register();

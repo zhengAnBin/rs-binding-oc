@@ -1,4 +1,4 @@
-use crate::{make_handler, register_ns_app_lication_delegate, RS_TRAIT_PTR};
+use crate::{make_handler, register_ns_application_delegate, RS_TRAIT_PTR};
 use rs_oc_appkit::{
     NSApplication, NSApplicationActivationOptions, NSApplicationActivationPolicy,
     NSApplicationDelegate, NSAutoresizingMaskOptions, NSBackingStoreType, NSRunningApplication,
@@ -159,7 +159,7 @@ impl WebView {
     {
         unsafe {
             let app_delegate = Box::new(delegate_trait);
-            let delegate_class = register_ns_app_lication_delegate::<T>();
+            let delegate_class = register_ns_application_delegate::<T>();
             let delegate: Object = msg_send![delegate_class, new];
             let delegate_ptr: *const T = &*app_delegate;
             (&mut *delegate).set_ivar(RS_TRAIT_PTR, delegate_ptr as usize);

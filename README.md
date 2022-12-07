@@ -1,4 +1,4 @@
-# rs-binging-oc
+# rs-binding-oc
 
 这是一个 rust 绑定 objective-c 的库、并在其基础上封装一个 macos_webview 库。使开发 macos 应用可以使用 rust + web 的技术
 
