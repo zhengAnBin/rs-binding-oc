@@ -6,6 +6,11 @@ pub struct Class {
     _priv: PrivateMarker,
 }
 
+#[repr(C)]
+pub struct Object {
+    _priv: PrivateMarker,
+}
+
 #[derive(Debug)]
 #[repr(C)]
 pub struct Sel {

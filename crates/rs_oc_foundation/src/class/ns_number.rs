@@ -171,7 +171,7 @@ impl NSNumber for Object {
     }
 
     fn init_with_double(self, double: c_double) -> Object {
-        unsafe { msg_send![class!(self), initWithChar: double] }
+        unsafe { msg_send![class!(self), initWithDouble: double] }
     }
 
     fn init_with_float(self, float: c_float) -> Object {
