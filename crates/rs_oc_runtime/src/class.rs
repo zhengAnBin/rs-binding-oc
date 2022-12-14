@@ -33,8 +33,3 @@ impl Class {
         unsafe { class_getInstanceSize(self) }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-}
