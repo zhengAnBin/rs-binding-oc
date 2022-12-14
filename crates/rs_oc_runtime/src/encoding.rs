@@ -84,24 +84,15 @@ impl fmt::Display for Encoding<'_> {
     }
 }
 
-// fn ep(s: &str, encode: &Encoding) -> bool {
-//     let s = s.trim_start_matches(QUALIFIERS);
-
-// }
-
 impl PartialEq<str> for Encoding<'_> {
     fn eq(&self, other: &str) -> bool {
-        // TODO: 如果直接使用 == 来比较，会导致栈溢出。
-        // self == other
-        todo!()
+        self.to_string() == other
     }
 }
 
 impl PartialEq<Encoding<'_>> for str {
     fn eq(&self, other: &Encoding) -> bool {
-        // TODO: 如果直接使用 == 来比较，会导致栈溢出。
-        // self == other
-        todo!()
+        other.to_string() == self
     }
 }
 
