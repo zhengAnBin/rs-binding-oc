@@ -24,6 +24,8 @@ extern "C" {
     pub fn ivar_getName(ivar: *const Ivar) -> *const c_char;
     pub fn ivar_getOffset(ivar: *const Ivar) -> isize;
     pub fn ivar_getTypeEncoding(ivar: *const Ivar) -> *const c_char;
+    pub fn object_getClass(obj: *const Object) -> *const Class;
+    pub fn class_getInstanceVariable(cls: *const Class, name: *const c_char) -> *const Ivar;
 }
 
 pub type PrivateMarker = [u8; 0];
