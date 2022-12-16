@@ -4,6 +4,8 @@ mod class;
 mod encoding;
 mod imp;
 mod ivar;
+mod malloc_buf;
+mod method;
 mod object;
 mod sel;
 
@@ -11,6 +13,8 @@ pub use class::*;
 pub use encoding::*;
 pub use imp::*;
 pub use ivar::*;
+pub use malloc_buf::*;
+pub use method::*;
 pub use object::*;
 pub use sel::*;
 
@@ -26,6 +30,8 @@ extern "C" {
     pub fn ivar_getTypeEncoding(ivar: *const Ivar) -> *const c_char;
     pub fn object_getClass(obj: *const Object) -> *const Class;
     pub fn class_getInstanceVariable(cls: *const Class, name: *const c_char) -> *const Ivar;
+    pub fn sel_getName(sel: Sel) -> *const c_char;
+    pub fn method_getName(method: *const Method) -> Sel;
 }
 
 pub type PrivateMarker = [u8; 0];
