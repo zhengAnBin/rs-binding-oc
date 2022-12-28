@@ -1,0 +1,43 @@
+{
+  "name": "create-macos-webview",
+  "version": "1.0.0",
+  "description": "create a webview app project in macos.",
+  "main": "index.js",
+  "bin": {
+    "create-macos-webview": "create-macos-webview.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:zhengAnBin/rs-binding-oc.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/zhengAnBin/rs-binding-oc/tree/main/crates/create_macos_webview",
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublish -t npm --gh-release-id $RELEASE_ID"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "2.14.0"
+  },
+  "keywords": [
+    "webview",
+    "macos",
+    "webkit"
+  ],
+  "license": "ISC",
+  "napi": {
+    "name": "create-macos-webview",
+    "triples": {
+      "additional": [
+        "aarch64-apple-darwin",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "armv7-unknown-linux-gnueabihf",
+        "x86_64-unknown-linux-musl"
+      ]
+    }
+  }
+}

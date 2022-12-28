@@ -1,5 +1,6 @@
 [workspace]
 members=[
+    "crates/create_macos_webview",
     "crates/macos_webview",
     "crates/rs_oc_basic", 
     "crates/rs_oc_foundation", 
@@ -8,3 +9,4 @@ members=[
     "crates/rs_oc_webkit", 
     "crates/rs_oc_runtime",
 ]
+exclude=["crates/create_macos_webview/node"]
